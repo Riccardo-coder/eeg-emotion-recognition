@@ -7,7 +7,7 @@
 |                     |                                   |
 |---------------------|-----------------------------------|
 | **Studente**        | Como Riccardo                     |
-| **Matricola**       | -                                 |
+| **Matricola**       | 758697                            |
 | **Docente**         | Silvia Corchs                     |
 | **Anno accademico** | 2025/2026                         |
 
