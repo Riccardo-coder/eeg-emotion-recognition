@@ -1,7 +1,8 @@
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
+import matplotlib
+matplotlib.use('Agg')   # use non-interactive backend
 import numpy as np
 import pandas as pd
 import time

@@ -65,7 +65,7 @@ def compare_filters_demo(save_path=None):
     plt.legend(fontsize=12)
     plt.xlabel('Campione', fontsize=12)
     plt.ylabel('Ampiezza', fontsize=12)
-    plt.title('Confronto Filtro Mediano vs Filtro Media - Esercizio 7.3', fontsize=14)
+    plt.title('Confronto Filtro Mediano vs Filtro Media', fontsize=14)
     plt.grid(True, alpha=0.3)
     
     # Evidenzia lo spike originale
