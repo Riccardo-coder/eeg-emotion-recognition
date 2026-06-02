@@ -23,10 +23,10 @@ def get_classifier_and_params(name):
             'metric': ['euclidean', 'manhattan']
         }
     elif name == 'LogisticRegression':
-        model = LogisticRegression(class_weight='balanced', max_iter=1000, solver='liblinear')
+        model = LogisticRegression(class_weight='balanced', max_iter=1000, solver='saga')
         params = {
             'C': [0.01, 0.1, 1, 10],
-            'penalty': ['l1', 'l2']
+            'l1_ratio': [0, 0.5, 1]   # 0 = L2, 1 = L1, 0.5 = ElasticNet
         }
     elif name == 'DecisionTree':
         model = DecisionTreeClassifier(class_weight='balanced')
