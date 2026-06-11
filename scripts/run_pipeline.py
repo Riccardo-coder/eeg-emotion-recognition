@@ -18,7 +18,11 @@ from src.utils import binarize_labels, print_class_distribution
 # ============================================================
 # CONFIGURAZIONE
 # ============================================================
-DATA_FOLDER = 'data/deap-dataset/'
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+DATA_FOLDER = os.path.join(PROJECT_ROOT, 'data', 'deap-dataset')
+RESULTS_FOLDER = os.path.join(PROJECT_ROOT, 'results')
+FIGURES_FOLDER = os.path.join(RESULTS_FOLDER, 'figures')
+TABLES_FOLDER = os.path.join(RESULTS_FOLDER, 'tables')
 CLASSIFIERS = ['SVM', 'KNN', 'LogisticRegression', 'DecisionTree', 'LDA']
 EMOTIONS = ['Valence', 'Arousal', 'Dominance', 'Liking']
 SEGMENT_NAMES = ['0-15s', '15-30s', '30-45s', '45-60s']
@@ -132,7 +136,7 @@ for emo_idx, emo_name in enumerate(EMOTIONS):
         # Crea e salva la matrice di confusione
         create_confusion_matrix(
             y_seg, best_clf_pred, emo_name, seg_name, best_clf_name,
-            save_path=f'results/figures/confusion_matrix_{emo_name}_{seg_name}_{best_clf_name}.png'
+            save_path=os.path.join(FIGURES_FOLDER, f'confusion_matrix_{emo_name}_{seg_name}_{best_clf_name}.png')
         )
 
         # Salva i risultati per CSV
@@ -146,18 +150,18 @@ for emo_idx, emo_name in enumerate(EMOTIONS):
             })
             
         # Salvataggio intermedio per evitare perdita dati in caso di crash
-        pd.DataFrame(all_results).to_csv('results/tmp_results.csv', index=False)
+        pd.DataFrame(all_results).to_csv(os.path.join(RESULTS_FOLDER, 'tmp_results.csv'), index=False)
 
 # ============================================================
 # 6. Salvataggio finale e report
 # ============================================================
-os.makedirs('results/tables', exist_ok=True)
+os.makedirs(TABLES_FOLDER, exist_ok=True)
 df = pd.DataFrame(all_results)
-df.to_csv('results/tables/f1_scores.csv', index=False)
+df.to_csv(os.path.join(TABLES_FOLDER, 'f1_scores.csv'), index=False)
 
 print("\n" + "="*60)
 print(f"✅ ELABORAZIONE COMPLETATA in {(time.time()-start_total)/60:.1f} minuti")
-print("Risultati salvati in: results/tables/f1_scores.csv")
+print(f"Risultati salvati in: {os.path.join(TABLES_FOLDER, 'f1_scores.csv')}")
 print("="*60)
 
 # ============================================================
@@ -167,24 +171,24 @@ print("\n" + "="*60)
 print("Generazione grafici aggiuntivi...")
 print("="*60)
 
-os.makedirs('results/figures', exist_ok=True)
+os.makedirs(FIGURES_FOLDER, exist_ok=True)
 
 # 1. Demo filtro mediano vs media (esercizio tipo)
-compare_filters_demo(save_path='results/figures/filter_comparison.png')
+compare_filters_demo(save_path=os.path.join(FIGURES_FOLDER, 'filter_comparison.png'))
 
 # 2. Esempio di segnale EEG (primo trial, primo canale)
-plot_eeg_signal(X_raw, save_path='results/figures/eeg_signal.png')
+plot_eeg_signal(X_raw, save_path=os.path.join(FIGURES_FOLDER, 'eeg_signal.png'))
 
 # 3. Grafico a barre dei migliori F1-score (usa il DataFrame all_results)
 if len(all_results) > 0:
     df_res = pd.DataFrame(all_results)
-    create_results_barplot(df_res, save_path='results/figures/best_results_barplot.png')
+    create_results_barplot(df_res, save_path=os.path.join(FIGURES_FOLDER, 'best_results_barplot.png'))
 
 # 4. Grafico PCA dell'ultimo segmento processato (se disponibile)
 if last_X_pca is not None and last_y_seg is not None:
-    create_pca_scatter(last_X_pca, last_y_seg, last_emo_name, last_seg_name, save_path='results/figures/pca_scatter.png')
+    create_pca_scatter(last_X_pca, last_y_seg, last_emo_name, last_seg_name, save_path=os.path.join(FIGURES_FOLDER, 'pca_scatter.png'))
 
-print("✅ Grafici generati in results/figures/")
+print(f"✅ Grafici generati in {FIGURES_FOLDER}")
 
 # Stampa dei migliori F1 per ogni emozione (escludendo eventuali righe con Best_F1 nullo o mancante)
 for emo in EMOTIONS:
