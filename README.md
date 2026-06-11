@@ -173,8 +173,7 @@ Le differenze sono dovute principalmente all’uso di kernel lineare in alcuni c
 
 ## 📚 Riferimenti
 
-- Doma, V., Pirouz, M. (2020). *A comparative analysis of machine learning methods for emotion recognition using EEG and peripheral physiological signals*. Journal of Big Data, 7, 18.  
-- Koelstra, S., et al. (2011). *DEAP: A database for emotion analysis using physiological signals*. IEEE Transactions on Affective Computing, 3(1), 18‑31.
+- Doma, V., Pirouz, M. (2020). *A comparative analysis of machine learning methods for emotion recognition using EEG and peripheral physiological signals*. Journal of Big Data, 7, 18.
 
 ---
 
