@@ -16,8 +16,8 @@ def segment_trial(eeg_trial, fs=128, segment_duration=15):
 
 def extract_statistical_features(segment):
     """
-    Estrae 5 feature per ogni canale: media, mediana, range, varianza, deviazione standard.
-    Restituisce vettore di 32*5 = 160 feature.
+    Estrae 6 feature per ogni canale: media, mediana, range, varianza, deviazione standard, moda.
+    Restituisce vettore di 32*6 = 192 feature.
     """
     features = []
     for ch in range(segment.shape[0]):
@@ -32,7 +32,7 @@ def extract_statistical_features(segment):
 
 def build_feature_matrix(X_raw):
     """
-    X_raw: (n_trials, 32, 8064) -> restituisce (n_trials*4, 160)
+    X_raw: (n_trials, 32, 8064) -> restituisce (n_trials*4, 192)
     """
     all_features = []
     for trial in range(X_raw.shape[0]):

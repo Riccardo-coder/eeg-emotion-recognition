@@ -59,10 +59,10 @@ for i, name in enumerate(EMOTIONS):
     print(f"{name}: {dict(zip(unique, counts))}")
 
 # ============================================================
-# 2. Estrazione feature statistiche (160 feature per segmento)
+# 2. Estrazione feature statistiche (192 feature per segmento)
 # ============================================================
 print("\nEstrazione feature statistiche...")
-X_feat = build_feature_matrix(X_raw)   # (n_trials*4, 160)
+X_feat = build_feature_matrix(X_raw)   # (n_trials*4, 192)
 n_trials = X_raw.shape[0]
 n_segments = 4
 print(f"Feature matrix shape: {X_feat.shape} (campioni totali = {n_trials} trial × 4 segmenti)")
@@ -104,7 +104,7 @@ for emo_idx, emo_name in enumerate(EMOTIONS):
         # Preleva i campioni di questo segmento (tutti i trial)
         # L'ordine in X_feat è: trial0_seg0, trial0_seg1, ..., trial1_seg0, ...
         seg_indices = np.arange(seg_idx, len(X_feat), n_segments)
-        X_seg = X_feat[seg_indices]        # (n_trials, 160)
+        X_seg = X_feat[seg_indices]        # (n_trials, 192)
         y_seg = y_bin_all[seg_indices]     # (n_trials,)
         
         # Applica PCA (con standardizzazione) e addestra i classificatori
